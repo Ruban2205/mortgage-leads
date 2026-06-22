@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import ComingSoonBadge from "./ComingSoonBadge";
+import LinkButton from "@/components/LinkButton";
 
 export interface LearningCardProps {
   id: string;
@@ -69,13 +70,13 @@ export default function LearningCard({
 
       {/* CTA */}
       {isActive ? (
-        <Button
-          asChild
+        <LinkButton
+          href={href}
           id={id}
           className="gradient-brand border-0 hover:opacity-90 font-semibold mt-2"
         >
-          <Link href={href}>{ctaLabel}</Link>
-        </Button>
+          {ctaLabel}
+        </LinkButton>
       ) : (
         <Button
           disabled

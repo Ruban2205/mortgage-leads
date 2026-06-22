@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import LinkButton from "@/components/LinkButton";
 import DisclaimerBox from "@/components/DisclaimerBox";
 
 // Static learning content for module pages
@@ -63,9 +64,9 @@ export default async function LearnPage({ params }: { params: Promise<{ slug: st
           <p className="text-slate-600 mb-6">
             This learning module doesn&apos;t exist yet, but more content is on the way!
           </p>
-          <Button asChild className="gradient-brand border-0 hover:opacity-90">
-            <Link href="/">Back to Dashboard</Link>
-          </Button>
+          <LinkButton href="/" className="gradient-brand border-0 hover:opacity-90">
+            Back to Dashboard
+          </LinkButton>
         </div>
       </div>
     );
@@ -116,9 +117,9 @@ export default async function LearnPage({ params }: { params: Promise<{ slug: st
               Take our free 5-minute assessment and get personalized guidance from a
               licensed mortgage professional.
             </p>
-            <Button asChild className="gradient-brand border-0 hover:opacity-90 font-semibold">
-              <Link href="/assessment">Start Free Assessment</Link>
-            </Button>
+            <LinkButton href="/assessment" className="gradient-brand border-0 hover:opacity-90 font-semibold">
+              Start Free Assessment
+            </LinkButton>
           </div>
         </div>
 

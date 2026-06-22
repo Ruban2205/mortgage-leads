@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import LinkButton from "@/components/LinkButton";
 
 const navLinks = [
   { href: "/", label: "Dashboard" },
@@ -60,9 +61,9 @@ export default function Header() {
 
           {/* CTA + Mobile toggle */}
           <div className="flex items-center gap-3">
-            <Button asChild size="sm" className="hidden md:flex gradient-brand border-0 hover:opacity-90 shadow-sm">
-              <Link href="/assessment">Start Assessment</Link>
-            </Button>
+            <LinkButton href="/assessment" size="sm" className="hidden md:flex gradient-brand border-0 hover:opacity-90 shadow-sm">
+              Start Assessment
+            </LinkButton>
 
             {/* Mobile hamburger */}
             <button
@@ -100,11 +101,9 @@ export default function Header() {
               </Link>
             ))}
             <div className="pt-2 px-3">
-              <Button asChild size="sm" className="w-full gradient-brand border-0 hover:opacity-90">
-                <Link href="/assessment" onClick={() => setMenuOpen(false)}>
-                  Start Assessment
-                </Link>
-              </Button>
+              <LinkButton href="/assessment" size="sm" onClick={() => setMenuOpen(false)} className="w-full gradient-brand border-0 hover:opacity-90">
+                Start Assessment
+              </LinkButton>
             </div>
           </div>
         )}

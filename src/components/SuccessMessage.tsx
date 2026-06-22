@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import LinkButton from "@/components/LinkButton";
 
 export default function SuccessMessage() {
   return (
@@ -55,12 +56,12 @@ export default function SuccessMessage() {
 
       {/* CTA */}
       <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-        <Button asChild className="gradient-brand border-0 hover:opacity-90 font-semibold">
-          <Link href="/">Return to Dashboard</Link>
-        </Button>
-        <Button asChild variant="outline">
-          <Link href="/coming-soon">Explore More Resources</Link>
-        </Button>
+        <LinkButton href="/" className="gradient-brand border-0 hover:opacity-90 font-semibold">
+          Return to Dashboard
+        </LinkButton>
+        <LinkButton href="/coming-soon" variant="outline">
+          Explore More Resources
+        </LinkButton>
       </div>
 
       <p className="text-xs text-slate-400">

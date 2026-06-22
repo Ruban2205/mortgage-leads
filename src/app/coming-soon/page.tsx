@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import LinkButton from "@/components/LinkButton";
 
 export const metadata: Metadata = {
   title: "Coming Soon",
@@ -53,12 +54,12 @@ export default function ComingSoonPage() {
 
         {/* Navigation */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button asChild className="gradient-brand border-0 hover:opacity-90 font-semibold">
-            <Link href="/assessment">Start Your Assessment</Link>
-          </Button>
-          <Button asChild variant="outline">
-            <Link href="/">Return to Dashboard</Link>
-          </Button>
+          <LinkButton href="/assessment" className="gradient-brand border-0 hover:opacity-90 font-semibold">
+            Start Your Assessment
+          </LinkButton>
+          <LinkButton href="/" variant="outline">
+            Return to Dashboard
+          </LinkButton>
         </div>
       </div>
     </div>
