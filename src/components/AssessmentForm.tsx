@@ -296,7 +296,7 @@ function Step4({ data, onChange }: {
       </div>
       <OptionGroup
         id="hasCreditIssues"
-        label="Any missed payments, collections, or bankruptcy history?"
+        label="Any missed payments, collections, bankruptcy, or consumer proposal history?"
         value={data.hasCreditIssues}
         onChange={set("hasCreditIssues")}
         options={[
@@ -452,7 +452,7 @@ export default function AssessmentForm() {
     }
     setIsSubmitting(true);
     setTimeout(() => {
-      console.log("📋 MortgagePath AI — Assessment Submitted:", formData);
+      console.log("📋 TrueNorth Mortgage Guide — Assessment Submitted:", formData);
       setIsSubmitting(false);
       setSubmitted(true);
     }, 1200);

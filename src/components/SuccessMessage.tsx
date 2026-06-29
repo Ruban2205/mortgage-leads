@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import LinkButton from "@/components/LinkButton";
 
 export default function SuccessMessage() {
@@ -29,13 +28,12 @@ export default function SuccessMessage() {
         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
           Assessment Submitted!
         </h2>
-        <p className="text-lg text-slate-700 font-medium">
+        <p className="text-base text-slate-700 font-medium">
           Your assessment has been submitted.
         </p>
         <p className="text-sm text-slate-500 leading-relaxed">
-          Based on your answers, a mortgage professional can review your
-          situation and help you understand your next steps. You will be
-          contacted using your preferred method.
+          Your answers can help a licensed mortgage professional understand your situation
+          and explain possible next steps. You will be contacted using your preferred method.
         </p>
       </div>
 
@@ -43,9 +41,9 @@ export default function SuccessMessage() {
       <div className="bg-slate-50 rounded-xl border border-slate-200 p-5 text-left max-w-md mx-auto space-y-3">
         <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">What Happens Next</p>
         {[
-          { icon: "📋", text: "Your responses are reviewed by a licensed professional" },
-          { icon: "📞", text: "We'll reach out via your preferred contact method" },
-          { icon: "🏡", text: "Get personalized guidance for your mortgage journey" },
+          { icon: "📋", text: "Your responses may be reviewed by a licensed mortgage professional" },
+          { icon: "📞", text: "You may be reached via your preferred contact method" },
+          { icon: "📘", text: "Explore our guides while you wait to learn more about mortgages" },
         ].map((item, i) => (
           <div key={i} className="flex items-start gap-3">
             <span className="text-lg leading-none mt-0.5">{item.icon}</span>
@@ -54,13 +52,21 @@ export default function SuccessMessage() {
         ))}
       </div>
 
+      {/* Important compliance note */}
+      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 max-w-md mx-auto">
+        <p className="text-xs text-amber-700 leading-relaxed">
+          <strong>Please Note:</strong> Submitting this assessment is not a mortgage application and
+          does not guarantee mortgage approval. Mortgage eligibility is determined by lender review.
+        </p>
+      </div>
+
       {/* CTA */}
       <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
         <LinkButton href="/" className="gradient-brand border-0 hover:opacity-90 font-semibold">
-          Return to Dashboard
+          Return to Home
         </LinkButton>
-        <LinkButton href="/coming-soon" variant="outline">
-          Explore More Resources
+        <LinkButton href="/mortgage-basics" variant="outline">
+          Explore Mortgage Guides
         </LinkButton>
       </div>
 

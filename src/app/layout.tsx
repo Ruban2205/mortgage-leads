@@ -1,39 +1,41 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CanadianTrustStrip from "@/components/CanadianTrustStrip";
 
-const geistSans = Geist({
+const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "MortgagePath AI — Understand Your Mortgage Readiness",
-    template: "%s | MortgagePath AI",
+    default: "TrueNorth Mortgage Guide — Canadian Mortgage Education",
+    template: "%s | TrueNorth Mortgage Guide",
   },
   description:
-    "MortgagePath AI helps Canadians understand mortgage readiness, learn financial basics, and connect with licensed mortgage professionals through a simple guided assessment.",
+    "TrueNorth Mortgage Guide helps Canadians understand mortgages, improve their readiness, and connect with licensed mortgage professionals through clear, trustworthy educational content.",
   keywords: [
+    "Canadian mortgage education",
     "mortgage readiness",
     "first time home buyer Canada",
-    "mortgage assessment",
-    "mortgage education",
-    "Canadian mortgage",
-    "home buying guide",
+    "mortgage assessment Canada",
+    "how mortgages work Canada",
+    "down payment Canada",
+    "credit score mortgage Canada",
+    "home buying guide Canada",
+    "mortgage glossary Canada",
+    "Canadian mortgage guide",
   ],
   openGraph: {
-    title: "MortgagePath AI — Understand Your Mortgage Readiness",
+    title: "TrueNorth Mortgage Guide — Proudly Canadian Mortgage Education",
     description:
-      "Learn the basics, check your readiness, and take the next step with simple, guided mortgage support.",
+      "Learn the basics, understand your readiness, and take the next step with clear mortgage education built for Canadians.",
     type: "website",
+    locale: "en_CA",
   },
 };
 
@@ -43,9 +45,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="min-h-screen flex flex-col antialiased">
+    <html lang="en-CA" className={inter.variable}>
+      <body className="min-h-screen flex flex-col antialiased bg-background text-foreground">
         <Header />
+        <CanadianTrustStrip />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>

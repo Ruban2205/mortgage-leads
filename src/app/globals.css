@@ -47,26 +47,28 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* MortgagePath AI Brand Colors */
+  /* TrueNorth Mortgage Guide Brand Colors */
   --color-brand-blue: #1e60c8;
   --color-brand-blue-dark: #1449a0;
   --color-brand-blue-light: #dbeafe;
-  --color-brand-green: #0d9f6e;
-  --color-brand-green-dark: #0a7f58;
-  --color-brand-green-light: #d1fae5;
+  --color-brand-teal: #0d9f6e;
+  --color-brand-teal-dark: #0a7f58;
+  --color-brand-teal-light: #d1fae5;
+  --color-canadian-red: #D52B1E;
+  --color-canadian-red-light: #fff0ee;
   --color-brand-slate: #475569;
   --color-brand-slate-light: #f1f5f9;
 }
 
 :root {
-  /* MortgagePath AI — Blue/Green brand palette */
+  /* TrueNorth Mortgage Guide — Trust Blue / Teal palette */
   --background: oklch(1 0 0);
   --foreground: oklch(0.18 0.015 250);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.015 250);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0.015 250);
-  /* Primary: brand blue */
+  /* Primary: trust blue */
   --primary: oklch(0.48 0.18 254);
   --primary-foreground: oklch(0.99 0 0);
   /* Secondary: soft sky */
@@ -74,7 +76,7 @@
   --secondary-foreground: oklch(0.3 0.05 254);
   --muted: oklch(0.96 0.01 240);
   --muted-foreground: oklch(0.5 0.03 250);
-  /* Accent: brand green */
+  /* Accent: brand teal */
   --accent: oklch(0.92 0.06 160);
   --accent-foreground: oklch(0.28 0.09 160);
   --destructive: oklch(0.577 0.245 27.325);
@@ -135,14 +137,17 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
   }
 }
 
-/* Smooth transitions for interactive elements */
+/* ── Utility Classes ──────────────────────────────────────────────────────── */
 @layer utilities {
   .transition-base {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  /* Card hover lift */
   .card-hover {
     transition: box-shadow 0.25s ease, transform 0.25s ease;
   }
@@ -150,8 +155,20 @@
     box-shadow: 0 20px 40px -12px rgb(30 96 200 / 0.15);
     transform: translateY(-2px);
   }
+
+  /* Guide card hover */
+  .guide-card-hover {
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  }
+  .guide-card-hover:hover {
+    box-shadow: 0 24px 48px -12px rgb(30 96 200 / 0.18);
+    transform: translateY(-3px);
+    border-color: rgb(30 96 200 / 0.3);
+  }
+
+  /* Gradients */
   .gradient-hero {
-    background: linear-gradient(135deg, #f0f7ff 0%, #e8f5f0 50%, #f0f7ff 100%);
+    background: linear-gradient(145deg, #f0f7ff 0%, #eaf9f4 40%, #f5f0ff 80%, #f0f7ff 100%);
   }
   .gradient-brand {
     background: linear-gradient(135deg, #1e60c8 0%, #0d9f6e 100%);
@@ -162,9 +179,51 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  .gradient-canadian {
+    background: linear-gradient(135deg, #D52B1E 0%, #1e60c8 100%);
+  }
+  .gradient-dark-footer {
+    background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+  }
+
+  /* Glass card */
   .glass-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(30, 96, 200, 0.1);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(30, 96, 200, 0.12);
+  }
+
+  /* Canadian accent strip */
+  .canadian-strip {
+    background: linear-gradient(90deg, #D52B1E 0%, #1e3a5f 30%, #1e3a5f 70%, #D52B1E 100%);
+  }
+
+  /* Section patterns */
+  .section-dots {
+    background-image: radial-gradient(circle, rgb(30 96 200 / 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Typography */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Prose for guide pages */
+  .guide-prose p {
+    @apply text-slate-600 leading-relaxed mb-4;
+  }
+  .guide-prose h3 {
+    @apply text-xl font-bold text-slate-900 mt-8 mb-3;
+  }
+  .guide-prose ul {
+    @apply space-y-2 mb-4;
+  }
+  .guide-prose ul li {
+    @apply flex items-start gap-2 text-slate-600;
+  }
+  .guide-prose ul li::before {
+    content: "✓";
+    @apply text-teal-600 font-bold flex-shrink-0 mt-0.5;
   }
 }

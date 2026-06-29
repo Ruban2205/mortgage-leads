@@ -1,70 +1,82 @@
 import Link from "next/link";
 
-const DISCLAIMER =
-  "This website provides general educational information only. It does not provide financial, legal, tax, or mortgage approval advice. Mortgage eligibility depends on lender review, credit history, income verification, debt obligations, down payment, property details, and applicable regulations. Please speak with a licensed mortgage professional before making financial decisions.";
+const DISCLAIMER = `This website provides general educational information only and does not constitute financial, legal, tax, or mortgage approval advice. Mortgage eligibility depends on lender review, verified income, credit history, debt obligations, down payment, property details, and applicable federal and provincial regulations. Speak with a licensed mortgage professional before making any financial decisions.`;
 
-const footerLinks = [
+const footerGroups = [
   {
-    heading: "Learn",
+    heading: "Mortgage Guides",
     items: [
-      { label: "Dashboard", href: "/" },
-      { label: "Assessment", href: "/assessment" },
-      { label: "First-Time Buyers", href: "/coming-soon" },
+      { label: "Mortgage Basics", href: "/mortgage-basics" },
+      { label: "First-Time Home Buyers", href: "/first-time-buyers" },
+      { label: "Credit & Debt Readiness", href: "/credit-debt" },
+      { label: "Down Payment Planning", href: "/down-payment" },
+      { label: "Affordability & Pre-Approval", href: "/affordability" },
+      { label: "Mortgage Glossary", href: "/glossary" },
     ],
   },
   {
     heading: "Resources",
     items: [
-      { label: "Credit Score Guide", href: "/coming-soon" },
-      { label: "DTI Calculator", href: "/coming-soon" },
-      { label: "Down Payment Planner", href: "/coming-soon" },
+      { label: "Mortgage Assessment", href: "/assessment" },
+      { label: "Contact a Professional", href: "/contact" },
     ],
   },
   {
-    heading: "Company",
+    heading: "Legal",
     items: [
-      { label: "Contact Us", href: "/coming-soon" },
-      { label: "Privacy Policy", href: "/coming-soon" },
-      { label: "Terms of Service", href: "/coming-soon" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms of Use", href: "/terms" },
+      { label: "Disclaimer", href: "/disclaimer" },
     ],
   },
 ];
+
+function MapleLeafIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2L9.5 7.5H4L8.5 11L6.5 17L12 13.5L17.5 17L15.5 11L20 7.5H14.5L12 2Z" />
+    </svg>
+  );
+}
 
 export default function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-300">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Main footer content */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand column */}
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-brand shadow-sm">
-                <svg className="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" />
-                </svg>
+        {/* Main footer grid */}
+        <div className="py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+          {/* Brand column — spans 2 on large */}
+          <div className="lg:col-span-2 space-y-5">
+            <Link href="/" className="flex items-center gap-2.5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl gradient-brand shadow-sm">
+                <MapleLeafIcon className="h-5 w-5 text-white" />
               </div>
-              <span className="font-bold text-white">MortgagePath <span className="text-slate-400">AI</span></span>
+              <div className="flex flex-col leading-none">
+                <span className="text-base font-extrabold tracking-tight text-white">TrueNorth</span>
+                <span className="text-[10px] font-semibold text-slate-400 tracking-wider uppercase">
+                  Mortgage Guide
+                </span>
+              </div>
             </Link>
-            <p className="text-sm text-slate-400 leading-relaxed">
-              Helping Canadians understand their mortgage readiness with simple, guided financial education.
+
+            <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
+              Helping Canadians understand mortgages with clear, trustworthy educational content.
+              Proudly Canadian mortgage education.
             </p>
-            <div className="flex items-center gap-1 text-xs text-slate-500">
-              <svg className="h-3.5 w-3.5 text-[#0d9f6e]" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              <span>No fees. No commitments.</span>
+
+            <div className="flex items-center gap-1.5 text-xs text-slate-500">
+              <MapleLeafIcon className="h-3.5 w-3.5 text-[#D52B1E]" />
+              <span>Proudly Canadian Mortgage Education</span>
             </div>
           </div>
 
-          {/* Link columns */}
-          {footerLinks.map((group) => (
+          {/* Link groups */}
+          {footerGroups.map((group) => (
             <div key={group.heading}>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">
                 {group.heading}
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2.5">
                 {group.items.map((item) => (
                   <li key={item.label}>
                     <Link
@@ -80,10 +92,11 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Disclaimer */}
-        <div className="border-t border-slate-800 py-6">
-          <div className="bg-slate-800/60 rounded-xl p-4 mb-6">
-            <div className="flex items-start gap-2">
+        <div className="border-t border-slate-800 py-8">
+
+          {/* Disclaimer */}
+          <div className="bg-slate-800/40 rounded-xl p-4 mb-6">
+            <div className="flex items-start gap-2.5">
               <svg className="h-4 w-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
@@ -91,9 +104,14 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
-            <p>© {new Date().getFullYear()} MortgagePath AI. All rights reserved.</p>
-            <p>For informational purposes only. Not financial advice.</p>
+          {/* Bottom bar */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+            <p>© {new Date().getFullYear()} TrueNorth Mortgage Guide. All rights reserved.</p>
+            <div className="flex items-center gap-4">
+              <Link href="/privacy-policy" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-slate-300 transition-colors">Terms of Use</Link>
+              <Link href="/disclaimer" className="hover:text-slate-300 transition-colors">Disclaimer</Link>
+            </div>
           </div>
         </div>
       </div>
