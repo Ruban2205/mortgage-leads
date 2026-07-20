@@ -6,12 +6,12 @@ import { useState } from "react";
 import LinkButton from "@/components/LinkButton";
 
 const GUIDE_LINKS = [
-  { href: "/mortgage-basics", label: "Mortgage Basics" },
-  { href: "/first-time-buyers", label: "First-Time Home Buyers" },
-  { href: "/credit-debt", label: "Credit & Debt Readiness" },
-  { href: "/down-payment", label: "Down Payment Planning" },
-  { href: "/affordability", label: "Affordability & Pre-Approval" },
-  { href: "/glossary", label: "Mortgage Glossary" },
+  { href: "/mortgage-basics", label: "Mortgage Basics", icon: "📘" },
+  { href: "/first-time-buyers", label: "First-Time Home Buyers", icon: "🏠" },
+  { href: "/credit-debt", label: "Credit & Debt Readiness", icon: "📊" },
+  { href: "/down-payment", label: "Down Payment Planning", icon: "💰" },
+  { href: "/affordability", label: "Affordability & Pre-Approval", icon: "📋" },
+  { href: "/glossary", label: "Mortgage Glossary", icon: "📖" },
 ];
 
 const NAV_LINKS = [
@@ -21,12 +21,7 @@ const NAV_LINKS = [
 
 function MapleLeafIcon({ className }: { className?: string }) {
   return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12 2L9.5 7.5H4L8.5 11L6.5 17L12 13.5L17.5 17L15.5 11L20 7.5H14.5L12 2Z" />
     </svg>
   );
@@ -41,35 +36,39 @@ export default function Header() {
   const isGuideActive = GUIDE_LINKS.some((g) => pathname === g.href);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-white/95 backdrop-blur-md shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/90 backdrop-blur-xl shadow-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl gradient-brand shadow-sm group-hover:shadow-md transition-shadow">
+
+          {/* ── Logo ── */}
+          <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
+            <div className="relative flex h-10 w-10 items-center justify-center rounded-xl gradient-brand shadow-sm group-hover:shadow-glow-blue transition-all duration-300">
               <MapleLeafIcon className="h-5 w-5 text-white" />
             </div>
             <div className="flex flex-col leading-none">
-              <span className="text-base font-extrabold tracking-tight gradient-brand-text">
+              <span className="text-base font-extrabold tracking-tight gradient-brand-text" style={{ fontFamily: "var(--font-heading, var(--font-sans))" }}>
                 TrueNorth
               </span>
-              <span className="text-[10px] font-semibold text-slate-500 tracking-wider uppercase">
+              <span className="text-[9px] font-bold text-slate-400 tracking-[0.12em] uppercase">
                 Mortgage Guide
               </span>
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+          {/* ── Desktop Nav ── */}
+          <nav className="hidden lg:flex items-center gap-0.5" aria-label="Main navigation">
             <Link
               href="/"
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                 isActive("/")
-                  ? "bg-primary/10 text-primary"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                  ? "bg-primary/8 text-primary"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
               }`}
             >
               Home
+              {isActive("/") && (
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full gradient-brand" />
+              )}
             </Link>
 
             {/* Guides dropdown */}
@@ -80,40 +79,46 @@ export default function Header() {
             >
               <button
                 id="guides-dropdown-toggle"
-                className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                   isGuideActive
-                    ? "bg-primary/10 text-primary"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                    ? "bg-primary/8 text-primary"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                 }`}
                 aria-expanded={guidesOpen}
                 aria-haspopup="true"
               >
                 Mortgage Guides
                 <svg
-                  className={`h-3.5 w-3.5 transition-transform ${guidesOpen ? "rotate-180" : ""}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
+                  className={`h-3.5 w-3.5 transition-transform duration-200 ${guidesOpen ? "rotate-180" : ""}`}
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
               {guidesOpen && (
-                <div className="absolute top-full left-0 mt-1 w-64 rounded-xl border border-border bg-white shadow-xl shadow-slate-200/60 py-2 z-50">
+                <div className="absolute top-full left-0 mt-2 w-72 rounded-2xl border border-slate-200/80 bg-white/95 backdrop-blur-xl shadow-premium py-2 z-50">
+                  {/* Dropdown header */}
+                  <div className="px-4 pb-2 pt-1 border-b border-slate-100 mb-1">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Browse Guides</p>
+                  </div>
                   {GUIDE_LINKS.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
-                      className={`flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
+                      className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-all duration-150 mx-1 rounded-xl ${
                         isActive(link.href)
                           ? "bg-primary/8 text-primary font-semibold"
                           : "text-slate-700 hover:bg-slate-50 hover:text-slate-900"
                       }`}
                     >
-                      <span className="h-1.5 w-1.5 rounded-full bg-teal-500 flex-shrink-0" />
+                      <span className="text-base flex-shrink-0">{link.icon}</span>
                       {link.label}
+                      {isActive(link.href) && (
+                        <svg className="ml-auto h-3.5 w-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      )}
                     </Link>
                   ))}
                 </div>
@@ -122,42 +127,44 @@ export default function Header() {
 
             <Link
               href="/glossary"
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                 isActive("/glossary")
-                  ? "bg-primary/10 text-primary"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                  ? "bg-primary/8 text-primary"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
               }`}
             >
               Glossary
             </Link>
             <Link
               href="/contact"
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                 isActive("/contact")
-                  ? "bg-primary/10 text-primary"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                  ? "bg-primary/8 text-primary"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
               }`}
             >
               Contact
             </Link>
           </nav>
 
-          {/* CTA + Mobile toggle */}
+          {/* ── CTA + Mobile toggle ── */}
           <div className="flex items-center gap-3">
-            <LinkButton
+            <Link
               href="/assessment"
-              size="sm"
               id="header-start-assessment"
-              className="hidden lg:flex gradient-brand border-0 hover:opacity-90 shadow-sm font-semibold"
+              className="hidden lg:inline-flex items-center gap-2 gradient-brand btn-glow text-white text-sm font-semibold rounded-xl px-5 py-2.5 shadow-sm transition-all duration-300"
             >
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
               Start Assessment
-            </LinkButton>
+            </Link>
 
             {/* Mobile hamburger */}
             <button
               id="mobile-menu-toggle"
               onClick={() => setMenuOpen(!menuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              className="lg:hidden p-2 rounded-xl hover:bg-slate-100 transition-colors"
               aria-label="Toggle navigation menu"
             >
               <svg className="h-5 w-5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -171,37 +178,37 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* ── Mobile Menu ── */}
         {menuOpen && (
-          <div className="lg:hidden border-t border-border/50 py-3 pb-5 space-y-1">
+          <div className="lg:hidden border-t border-slate-100 py-3 pb-5 space-y-0.5">
             <Link
               href="/"
               onClick={() => setMenuOpen(false)}
-              className={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                isActive("/") ? "bg-primary/10 text-primary" : "text-slate-700 hover:bg-slate-100"
+              className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                isActive("/") ? "bg-primary/8 text-primary" : "text-slate-700 hover:bg-slate-50"
               }`}
             >
               Home
             </Link>
 
             {/* Mobile Guides Section */}
-            <div className="px-3 pt-2 pb-1">
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+            <div className="px-4 pt-3 pb-1">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">
                 Mortgage Guides
               </p>
-              <div className="space-y-0.5 pl-1">
+              <div className="space-y-0.5">
                 {GUIDE_LINKS.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+                    className={`flex items-center gap-3 px-3 py-2 rounded-xl text-sm transition-colors ${
                       isActive(link.href)
-                        ? "bg-primary/10 text-primary font-semibold"
-                        : "text-slate-600 hover:bg-slate-100"
+                        ? "bg-primary/8 text-primary font-semibold"
+                        : "text-slate-600 hover:bg-slate-50"
                     }`}
                   >
-                    <span className="h-1.5 w-1.5 rounded-full bg-teal-500 flex-shrink-0" />
+                    <span className="text-base">{link.icon}</span>
                     {link.label}
                   </Link>
                 ))}
@@ -211,23 +218,25 @@ export default function Header() {
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
-              className={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                isActive("/contact") ? "bg-primary/10 text-primary" : "text-slate-700 hover:bg-slate-100"
+              className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                isActive("/contact") ? "bg-primary/8 text-primary" : "text-slate-700 hover:bg-slate-50"
               }`}
             >
               Contact
             </Link>
 
-            <div className="pt-3 px-3">
-              <LinkButton
+            <div className="pt-3 px-4">
+              <Link
                 href="/assessment"
-                size="sm"
                 id="mobile-start-assessment"
                 onClick={() => setMenuOpen(false)}
-                className="w-full gradient-brand border-0 hover:opacity-90 font-semibold justify-center"
+                className="w-full inline-flex items-center justify-center gap-2 gradient-brand btn-glow text-white text-sm font-semibold rounded-xl px-5 py-3"
               >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
                 Start Free Assessment
-              </LinkButton>
+              </Link>
             </div>
           </div>
         )}

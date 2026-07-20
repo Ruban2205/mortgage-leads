@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export interface GuideCardProps {
   id: string;
@@ -22,45 +25,59 @@ export default function GuideCard({
   accentBg,
 }: GuideCardProps) {
   return (
-    <Link
-      href={href}
-      id={id}
-      className="group relative flex flex-col rounded-2xl border border-slate-200 bg-white p-6 guide-card-hover"
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Icon */}
-      <div
-        className={`flex h-12 w-12 items-center justify-center rounded-xl mb-4 ${accentBg} transition-transform group-hover:scale-110`}
+      <Link
+        href={href}
+        id={id}
+        className="group relative flex flex-col h-full rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-350 hover:-translate-y-1.5"
       >
-        <span className={accentColor}>{icon}</span>
-      </div>
+        {/* Top gradient accent bar */}
+        <div className={`h-1 w-full bg-gradient-to-r ${accentBg.replace("bg-", "from-").replace("-50", "-400")} to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300`} />
 
-      {/* Content */}
-      <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">
-        {title}
-      </h3>
-      <p className="text-sm text-slate-600 leading-relaxed flex-1">{description}</p>
+        <div className="p-6 flex flex-col flex-1">
+          {/* Icon + Read time row */}
+          <div className="flex items-start justify-between mb-5">
+            <div
+              className={`flex h-13 w-13 items-center justify-center rounded-2xl ${accentBg} transition-all duration-300 group-hover:scale-110 group-hover:shadow-sm`}
+              style={{ width: "52px", height: "52px" }}
+            >
+              <span className={`${accentColor} flex`}>{icon}</span>
+            </div>
+            <span className={`text-xs font-semibold ${accentColor} ${accentBg} rounded-full px-2.5 py-1`}>
+              {readTime}
+            </span>
+          </div>
 
-      {/* Footer row */}
-      <div className="mt-5 flex items-center justify-between">
-        <span className="text-xs text-slate-400 font-medium">{readTime}</span>
-        <div className="flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all">
-          Read Guide
-          <svg
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2.5"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
+          {/* Content */}
+          <h3 className="text-lg font-bold text-slate-900 mb-2.5 leading-snug group-hover:text-primary transition-colors duration-200">
+            {title}
+          </h3>
+          <p className="text-sm text-slate-500 leading-relaxed flex-1">{description}</p>
+
+          {/* Footer row */}
+          <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <div className={`flex items-center gap-1.5 text-sm font-semibold ${accentColor} group-hover:gap-2.5 transition-all duration-200`}>
+              Read Guide
+              <svg
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+            <div className={`h-7 w-7 rounded-full ${accentBg} flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0`}>
+              <svg className={`h-3.5 w-3.5 ${accentColor}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
         </div>
-      </div>
-
-      {/* Bottom accent bar */}
-      <div
-        className={`absolute bottom-0 left-0 right-0 h-0.5 rounded-b-2xl ${accentBg} opacity-0 group-hover:opacity-100 transition-opacity`}
-      />
-    </Link>
+      </Link>
+    </motion.div>
   );
 }

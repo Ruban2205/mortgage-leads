@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const FAQS = [
   {
@@ -51,70 +52,112 @@ export default function FAQAccordion() {
   const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id));
 
   return (
-    <section className="py-16 sm:py-24 bg-white">
+    <section className="py-20 sm:py-28 bg-white">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 mb-4">
-            <span className="text-xs font-semibold text-primary uppercase tracking-wide">Common Questions</span>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-14"
+        >
+          <div className="inline-flex items-center gap-2 rounded-full bg-primary/8 border border-primary/15 px-4 py-1.5 mb-5">
+            <svg className="h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span className="text-xs font-bold text-primary uppercase tracking-widest">Common Questions</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-            Questions Canadians Ask About Mortgages
+          <h2 className="heading-display text-4xl sm:text-5xl text-slate-900 mb-5">
+            Questions Canadians{" "}
+            <span className="gradient-brand-text">Ask About Mortgages</span>
           </h2>
-          <p className="text-slate-600 text-lg">
+          <p className="text-slate-500 text-lg leading-relaxed">
             General answers to help you start learning. Always verify details with a licensed mortgage professional.
           </p>
-        </div>
+        </motion.div>
 
         {/* Accordion */}
         <div className="space-y-3">
-          {FAQS.map((faq) => {
+          {FAQS.map((faq, i) => {
             const isOpen = openId === faq.id;
             return (
-              <div
+              <motion.div
                 key={faq.id}
-                className={`rounded-xl border transition-all duration-200 ${
-                  isOpen
-                    ? "border-primary/30 bg-primary/3 shadow-sm"
-                    : "border-slate-200 bg-white hover:border-slate-300"
-                }`}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
               >
-                <button
-                  id={faq.id}
-                  onClick={() => toggle(faq.id)}
-                  className="w-full flex items-start justify-between gap-4 px-5 py-4 text-left"
-                  aria-expanded={isOpen}
+                <div
+                  className={`rounded-2xl border overflow-hidden transition-all duration-300 ${
+                    isOpen
+                      ? "border-primary/25 shadow-premium bg-white"
+                      : "border-slate-200 bg-white hover:border-slate-300 shadow-card"
+                  }`}
                 >
-                  <span className={`text-sm font-semibold leading-relaxed ${isOpen ? "text-primary" : "text-slate-900"}`}>
-                    {faq.q}
-                  </span>
-                  <svg
-                    className={`h-5 w-5 flex-shrink-0 mt-0.5 transition-transform duration-300 ${
-                      isOpen ? "rotate-180 text-primary" : "text-slate-400"
-                    }`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
+                  {/* Left accent bar on open */}
+                  <div className={`flex`}>
+                    <div className={`w-1 flex-shrink-0 transition-all duration-300 rounded-l-2xl ${isOpen ? "gradient-brand" : "bg-transparent"}`} />
 
-                {isOpen && (
-                  <div className="px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
-                    {faq.a}
+                    <div className="flex-1">
+                      <button
+                        id={faq.id}
+                        onClick={() => toggle(faq.id)}
+                        className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
+                        aria-expanded={isOpen}
+                      >
+                        <span className={`text-sm font-semibold leading-relaxed transition-colors duration-200 ${isOpen ? "text-primary" : "text-slate-800"}`}>
+                          {faq.q}
+                        </span>
+                        <div className={`flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 ${isOpen ? "gradient-brand text-white rotate-45" : "bg-slate-100 text-slate-400"}`}>
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                          </svg>
+                        </div>
+                      </button>
+
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            key="content"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <div className="px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                              {faq.a}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </div>
-                )}
-              </div>
+                </div>
+              </motion.div>
             );
           })}
         </div>
 
         {/* Compliance note */}
-        <div className="mt-8 rounded-xl bg-amber-50 border border-amber-200 p-4 text-xs text-amber-700 leading-relaxed">
-          <strong className="font-semibold">Educational Information Only:</strong> The answers above are general information intended to help you understand Canadian mortgage concepts. They are not financial, legal, tax, or mortgage approval advice. Mortgage eligibility depends on lender review, income, credit, debts, property, and applicable regulations. Speak with a licensed mortgage professional before making decisions.
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-10 rounded-2xl bg-amber-50 border border-amber-200/70 p-5 text-xs text-amber-700 leading-relaxed"
+        >
+          <div className="flex items-start gap-3">
+            <svg className="h-4 w-4 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+            <p>
+              <strong className="font-semibold">Educational Information Only:</strong> The answers above are general information intended to help you understand Canadian mortgage concepts. They are not financial, legal, tax, or mortgage approval advice. Mortgage eligibility depends on lender review, income, credit, debts, property, and applicable regulations. Speak with a licensed mortgage professional before making decisions.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
