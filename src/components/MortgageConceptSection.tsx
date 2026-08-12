@@ -16,8 +16,7 @@ const CONCEPTS = [
       "In Canada, the maximum amortization for insured mortgages (less than 20% down) is 25 years. For uninsured mortgages, it can extend to 30 years. A longer amortization means lower monthly payments but more interest paid overall.",
     tag: "Core Concept",
     gradient: "from-blue-500 to-blue-700",
-    tagColor: "bg-blue-100/80 text-blue-700",
-    glow: "blue",
+    tagColor: "bg-blue-100/90 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300",
   },
   {
     id: "gds-tds",
@@ -32,8 +31,7 @@ const CONCEPTS = [
       "Gross Debt Service (GDS) measures housing costs vs. income. Total Debt Service (TDS) includes all debts. Lenders typically require GDS below 39% and TDS below 44%. Understanding these ratios helps you estimate how much home you can afford.",
     tag: "Qualification",
     gradient: "from-teal-500 to-emerald-600",
-    tagColor: "bg-teal-100/80 text-teal-700",
-    glow: "teal",
+    tagColor: "bg-teal-100/90 text-teal-700 dark:bg-teal-500/20 dark:text-teal-300",
   },
   {
     id: "stress-test",
@@ -48,8 +46,7 @@ const CONCEPTS = [
       "All federally regulated lenders must apply the stress test. You must qualify at the higher of your contract rate plus 2%, or 5.25% — whichever is greater. This ensures you can handle rate increases over time.",
     tag: "Regulatory",
     gradient: "from-violet-500 to-purple-700",
-    tagColor: "bg-violet-100/80 text-violet-700",
-    glow: "violet",
+    tagColor: "bg-violet-100/90 text-violet-700 dark:bg-violet-500/20 dark:text-violet-300",
   },
   {
     id: "cmhc",
@@ -64,17 +61,17 @@ const CONCEPTS = [
       "If your down payment is between 5–19.99%, you must pay CMHC mortgage default insurance. The premium ranges from 2.8% to 4% of the mortgage amount and is added to your loan balance. It protects the lender, not the borrower.",
     tag: "Insurance",
     gradient: "from-amber-500 to-orange-600",
-    tagColor: "bg-amber-100/80 text-amber-700",
-    glow: "amber",
+    tagColor: "bg-amber-100/90 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300",
   },
 ];
 
 export default function MortgageConceptSection() {
   return (
-    <section className="py-20 sm:py-28 gradient-mesh-dark relative overflow-hidden">
+    <section className="py-20 sm:py-28 bg-muted/30 dark:bg-card/20 relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute -top-24 left-1/4 h-96 w-96 rounded-full bg-blue-100/30 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 right-1/4 h-96 w-96 rounded-full bg-teal-100/30 blur-3xl pointer-events-none" />
+      <div className="absolute -top-24 left-1/4 h-96 w-96 rounded-full bg-blue-100/20 dark:bg-blue-500/5 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 right-1/4 h-96 w-96 rounded-full bg-teal-100/20 dark:bg-teal-500/5 blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 section-grid opacity-30 pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -85,15 +82,15 @@ export default function MortgageConceptSection() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 rounded-full bg-white border border-teal-100 px-4 py-1.5 mb-5 shadow-sm">
+          <div className="inline-flex items-center gap-2 rounded-full bg-card border border-teal-200/60 dark:border-teal-500/20 px-4 py-1.5 mb-5 shadow-sm">
             <span className="h-2 w-2 rounded-full bg-teal-500 animate-pulse" />
-            <span className="text-xs font-bold text-teal-700 uppercase tracking-widest">Mortgage Education</span>
+            <span className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-widest">Mortgage Education</span>
           </div>
-          <h2 className="heading-display text-4xl sm:text-5xl text-slate-900 mb-5">
+          <h2 className="heading-display text-4xl sm:text-5xl text-foreground mb-5">
             How Mortgages Work{" "}
-            <span className="gradient-brand-text">in Canada</span>
+            <span className="gradient-finance-text">in Canada</span>
           </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Four key concepts every Canadian home buyer should understand before applying.
           </p>
         </motion.div>
@@ -107,25 +104,31 @@ export default function MortgageConceptSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -5 }}
             >
-              <div className="group relative flex flex-col h-full bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-350 hover:-translate-y-1.5">
+              <div className="group relative flex flex-col h-full bg-card dark:bg-card rounded-2xl border border-border overflow-hidden shadow-card hover:shadow-finance transition-all duration-300">
                 {/* Gradient header band */}
                 <div className={`relative bg-gradient-to-br ${c.gradient} p-5`}>
                   {/* Icon */}
-                  <div className="flex h-13 w-13 items-center justify-center rounded-xl bg-white/20">
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex h-13 w-13 items-center justify-center rounded-xl bg-white/20"
+                    style={{ width: "52px", height: "52px" }}
+                  >
                     {c.icon}
-                  </div>
+                  </motion.div>
                   {/* Tag badge */}
-                  <span className={`absolute top-4 right-4 text-[9px] font-extrabold uppercase tracking-widest rounded-full px-2.5 py-1 ${c.tagColor} bg-white/90`}>
+                  <span className={`absolute top-4 right-4 text-[9px] font-extrabold uppercase tracking-widest rounded-full px-2.5 py-1 ${c.tagColor} bg-white/90 dark:bg-transparent`}>
                     {c.tag}
                   </span>
                 </div>
 
                 {/* Content */}
                 <div className="p-5 flex flex-col flex-1">
-                  <h3 className="text-base font-bold text-slate-900 mb-1.5 leading-snug">{c.title}</h3>
-                  <p className="text-xs font-medium text-slate-400 mb-3">{c.shortDesc}</p>
-                  <p className="text-sm text-slate-600 leading-relaxed flex-1">{c.detail}</p>
+                  <h3 className="text-base font-bold text-foreground mb-1.5 leading-snug">{c.title}</h3>
+                  <p className="text-xs font-medium text-muted-foreground mb-3">{c.shortDesc}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed flex-1">{c.detail}</p>
                 </div>
 
                 {/* Bottom hover bar */}
@@ -143,7 +146,7 @@ export default function MortgageConceptSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-10 text-center"
         >
-          <p className="text-xs text-slate-400 max-w-xl mx-auto">
+          <p className="text-xs text-muted-foreground/70 max-w-xl mx-auto">
             The above is general educational information only. Mortgage eligibility is determined by individual lender review.{" "}
             Speak with a licensed mortgage professional for advice specific to your situation.
           </p>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import FormProgress from "./FormProgress";
 import StepNavigation from "./StepNavigation";
 import SuccessMessage from "./SuccessMessage";
@@ -22,7 +23,7 @@ const initialFormData: AssessmentFormData = {
 // ─── Shared UI primitives ────────────────────────────────────────────────────
 function Label({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) {
   return (
-    <label htmlFor={htmlFor} className="block text-sm font-semibold text-slate-700 mb-1.5">
+    <label htmlFor={htmlFor} className="block text-sm font-semibold text-foreground mb-1.5">
       {children}
     </label>
   );
@@ -42,7 +43,7 @@ function InputField({
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       required={required}
-      className="w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
+      className="w-full rounded-xl neomorph-input px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none transition-all duration-200 bg-[#F7FAFD] dark:bg-[oklch(0.11_0.022_254)]"
     />
   );
 }
@@ -53,14 +54,22 @@ function SelectField({
   id: string; value: string; onChange: (v: string) => void; children: React.ReactNode;
 }) {
   return (
-    <select
-      id={id}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className="w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all appearance-none cursor-pointer"
-    >
-      {children}
-    </select>
+    <div className="relative">
+      <select
+        id={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full rounded-xl neomorph-input px-4 py-3 pr-10 text-sm text-foreground focus:outline-none transition-all duration-200 appearance-none cursor-pointer bg-[#F7FAFD] dark:bg-[oklch(0.11_0.022_254)]"
+      >
+        {children}
+      </select>
+      {/* Custom chevron */}
+      <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+        <svg className="h-4 w-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
   );
 }
 
@@ -75,24 +84,27 @@ function OptionGroup({
       <Label htmlFor={id}>{label}</Label>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
         {options.map((opt) => (
-          <button
+          <motion.button
             key={opt.value}
             type="button"
             id={`${id}-${opt.value}`}
             onClick={() => onChange(opt.value)}
-            className={`flex items-center justify-start gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium text-left transition-all ${
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            className={`flex items-center justify-start gap-3 rounded-xl border px-4 py-3 text-sm font-medium text-left transition-all duration-200 ${
               value === opt.value
-                ? "border-primary bg-primary/5 text-primary ring-2 ring-primary/20"
-                : "border-input bg-background text-foreground hover:border-primary/40 hover:bg-muted/50"
+                ? "border-primary gradient-brand text-white shadow-glow-blue"
+                : "border-border bg-card text-foreground hover:border-primary/30 hover:bg-primary/3 dark:hover:bg-primary/8"
             }`}
           >
+            {/* Radio indicator */}
             <span className={`h-4 w-4 rounded-full border-2 flex-shrink-0 transition-all ${
               value === opt.value
-                ? "border-primary bg-primary"
-                : "border-slate-300"
+                ? "border-white bg-white/30"
+                : "border-muted-foreground/40"
             }`} />
             {opt.label}
-          </button>
+          </motion.button>
         ))}
       </div>
     </div>
@@ -264,22 +276,24 @@ function Step4({ data, onChange }: {
         <p className="text-xs text-muted-foreground mb-2">If unsure, pick your best estimate — it helps us give better guidance.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {creditOptions.map((opt) => (
-            <button
+            <motion.button
               key={opt.value}
               type="button"
               id={`creditScore-${opt.value}`}
               onClick={() => set("creditScore")(opt.value)}
-              className={`flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium text-left transition-all ${
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium text-left transition-all duration-200 ${
                 data.creditScore === opt.value
-                  ? "border-primary bg-primary/5 text-primary ring-2 ring-primary/20"
-                  : "border-input bg-background text-foreground hover:border-primary/40 hover:bg-muted/50"
+                  ? "border-primary gradient-brand text-white shadow-glow-blue"
+                  : "border-border bg-card text-foreground hover:border-primary/30 hover:bg-primary/3 dark:hover:bg-primary/8"
               }`}
             >
               <span className={`h-4 w-4 rounded-full border-2 flex-shrink-0 ${
-                data.creditScore === opt.value ? "border-primary bg-primary" : "border-slate-300"
+                data.creditScore === opt.value ? "border-white bg-white/30" : "border-muted-foreground/40"
               }`} />
               {opt.label}
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>
@@ -397,8 +411,8 @@ function Step6({ data, onChange }: {
               onClick={() => onChange({ ...data, consentGiven: !data.consentGiven })}
               className={`h-5 w-5 rounded border-2 flex items-center justify-center transition-all cursor-pointer ${
                 data.consentGiven
-                  ? "border-primary bg-primary"
-                  : "border-slate-300 bg-white group-hover:border-primary/50"
+                  ? "border-primary gradient-brand"
+                  : "border-muted-foreground/40 bg-card group-hover:border-primary/50"
               }`}
             >
               {data.consentGiven && (
@@ -408,15 +422,15 @@ function Step6({ data, onChange }: {
               )}
             </div>
           </div>
-          <p className="text-sm text-slate-600 leading-relaxed">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             I consent to being contacted by a licensed mortgage professional regarding my assessment results. I understand this is for informational purposes only and does not constitute a mortgage application or guarantee of approval.{" "}
             <span className="text-primary font-medium">*Required</span>
           </p>
         </label>
       </div>
 
-      <div className="rounded-xl bg-blue-50 border border-blue-100 p-4">
-        <div className="flex items-center gap-2 text-sm text-blue-700">
+      <div className="rounded-xl bg-primary/5 dark:bg-primary/10 border border-primary/12 p-4">
+        <div className="flex items-center gap-2 text-sm text-primary">
           <svg className="h-4 w-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
           </svg>
@@ -427,12 +441,31 @@ function Step6({ data, onChange }: {
   );
 }
 
+// ─── Step transition variants ─────────────────────────────────────────────────
+const stepVariants = {
+  enter: (dir: number) => ({
+    x: dir > 0 ? 40 : -40,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const },
+  },
+  exit: (dir: number) => ({
+    x: dir > 0 ? -40 : 40,
+    opacity: 0,
+    transition: { duration: 0.25, ease: "easeIn" as const },
+  }),
+};
+
 // ─── Main Component ──────────────────────────────────────────────────────────
 export default function AssessmentForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<AssessmentFormData>(initialFormData);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [direction, setDirection] = useState(1);
 
   const updateSection = <K extends keyof AssessmentFormData>(
     section: K,
@@ -440,10 +473,16 @@ export default function AssessmentForm() {
   ) => setFormData((prev) => ({ ...prev, [section]: data }));
 
   const handleNext = () => {
-    if (currentStep < 6) setCurrentStep((s) => s + 1);
+    if (currentStep < 6) {
+      setDirection(1);
+      setCurrentStep((s) => s + 1);
+    }
   };
   const handleBack = () => {
-    if (currentStep > 1) setCurrentStep((s) => s - 1);
+    if (currentStep > 1) {
+      setDirection(-1);
+      setCurrentStep((s) => s - 1);
+    }
   };
   const handleSubmit = () => {
     if (!formData.contactPreference.consentGiven) {
@@ -479,25 +518,37 @@ export default function AssessmentForm() {
         <p className="text-sm text-muted-foreground">{stepDescriptions[currentStep]}</p>
       </div>
 
-      <div className="min-h-[340px]">
-        {currentStep === 1 && (
-          <Step1 data={formData.personalInfo} onChange={(d) => updateSection("personalInfo", d)} />
-        )}
-        {currentStep === 2 && (
-          <Step2 data={formData.homeBuyingGoal} onChange={(d) => updateSection("homeBuyingGoal", d)} />
-        )}
-        {currentStep === 3 && (
-          <Step3 data={formData.incomeEmployment} onChange={(d) => updateSection("incomeEmployment", d)} />
-        )}
-        {currentStep === 4 && (
-          <Step4 data={formData.creditDebt} onChange={(d) => updateSection("creditDebt", d)} />
-        )}
-        {currentStep === 5 && (
-          <Step5 data={formData.downPayment} onChange={(d) => updateSection("downPayment", d)} />
-        )}
-        {currentStep === 6 && (
-          <Step6 data={formData.contactPreference} onChange={(d) => updateSection("contactPreference", d)} />
-        )}
+      {/* Animated step content */}
+      <div className="min-h-[340px] relative overflow-hidden">
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div
+            key={currentStep}
+            custom={direction}
+            variants={stepVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+          >
+            {currentStep === 1 && (
+              <Step1 data={formData.personalInfo} onChange={(d) => updateSection("personalInfo", d)} />
+            )}
+            {currentStep === 2 && (
+              <Step2 data={formData.homeBuyingGoal} onChange={(d) => updateSection("homeBuyingGoal", d)} />
+            )}
+            {currentStep === 3 && (
+              <Step3 data={formData.incomeEmployment} onChange={(d) => updateSection("incomeEmployment", d)} />
+            )}
+            {currentStep === 4 && (
+              <Step4 data={formData.creditDebt} onChange={(d) => updateSection("creditDebt", d)} />
+            )}
+            {currentStep === 5 && (
+              <Step5 data={formData.downPayment} onChange={(d) => updateSection("downPayment", d)} />
+            )}
+            {currentStep === 6 && (
+              <Step6 data={formData.contactPreference} onChange={(d) => updateSection("contactPreference", d)} />
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       <StepNavigation

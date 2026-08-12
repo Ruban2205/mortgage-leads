@@ -43,22 +43,39 @@ const TRUST_SIGNALS = [
 ];
 
 export default function CanadianTrustStrip() {
+  // Build the marquee content twice for seamless loop
+  const marqueeContent = (
+    <>
+      {TRUST_SIGNALS.map((item, i) => (
+        <span key={i} className="flex items-center gap-1.5 flex-shrink-0 px-3">
+          {i > 0 && (
+            <span className="h-1 w-1 rounded-full bg-slate-700 mr-2 flex-shrink-0" aria-hidden="true" />
+          )}
+          {item.icon}
+          <span className={`font-medium whitespace-nowrap ${item.highlight ? "text-white" : "text-slate-400"}`}>
+            {item.label}
+          </span>
+        </span>
+      ))}
+    </>
+  );
+
   return (
     <div
-      className="w-full bg-slate-900 border-b border-slate-800 overflow-hidden"
+      className="w-full bg-[#040D1A] border-b border-slate-800/60 overflow-hidden"
       role="banner"
       aria-label="Site notice"
     >
-      {/* Top accent line */}
-      <div className="h-0.5 w-full gradient-brand" />
+      {/* Top accent line — finance blue */}
+      <div className="h-0.5 w-full" style={{ background: "linear-gradient(90deg, #0A4D9B, #2B7FFF, #0EA76A, #2B7FFF, #0A4D9B)" }} />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2.5">
+      {/* Desktop: static centered layout */}
+      <div className="hidden sm:block mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2.5">
         <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs">
           {TRUST_SIGNALS.map((item, i) => (
             <span key={i} className="flex items-center gap-1.5">
-              {/* Dot separator */}
               {i > 0 && (
-                <span className="hidden sm:block h-1 w-1 rounded-full bg-slate-600 -ml-2 mr-1" aria-hidden="true" />
+                <span className="h-1 w-1 rounded-full bg-slate-600 mr-1" aria-hidden="true" />
               )}
               {item.icon}
               <span className={`font-medium ${item.highlight ? "text-white" : "text-slate-400"}`}>
@@ -66,6 +83,15 @@ export default function CanadianTrustStrip() {
               </span>
             </span>
           ))}
+        </div>
+      </div>
+
+      {/* Mobile: scrolling marquee */}
+      <div className="sm:hidden py-2.5 text-xs">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {marqueeContent}
+          {/* Duplicate for seamless loop */}
+          {marqueeContent}
         </div>
       </div>
     </div>

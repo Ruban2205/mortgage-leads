@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CanadianTrustStrip from "@/components/CanadianTrustStrip";
+import Providers from "./providers";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -52,12 +53,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-CA" className={`${inter.variable} ${plusJakarta.variable}`}>
+    <html lang="en-CA" className={`${inter.variable} ${plusJakarta.variable}`} suppressHydrationWarning>
       <body className="min-h-screen flex flex-col antialiased bg-background text-foreground">
-        <Header />
-        <CanadianTrustStrip />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <Providers>
+          <Header />
+          <CanadianTrustStrip />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LinkButton from "@/components/LinkButton";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const GUIDE_LINKS = [
   { href: "/mortgage-basics", label: "Mortgage Basics", icon: "📘" },
@@ -12,11 +13,6 @@ const GUIDE_LINKS = [
   { href: "/down-payment", label: "Down Payment Planning", icon: "💰" },
   { href: "/affordability", label: "Affordability & Pre-Approval", icon: "📋" },
   { href: "/glossary", label: "Mortgage Glossary", icon: "📖" },
-];
-
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/contact", label: "Contact" },
 ];
 
 function MapleLeafIcon({ className }: { className?: string }) {
@@ -31,12 +27,25 @@ export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [guidesOpen, setGuidesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const isActive = (href: string) => pathname === href;
   const isGuideActive = GUIDE_LINKS.some((g) => pathname === g.href);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/90 backdrop-blur-xl shadow-sm">
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        scrolled
+          ? "glass-nav shadow-md"
+          : "bg-background/90 backdrop-blur-xl border-b border-border/50"
+      }`}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
 
@@ -44,12 +53,17 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
             <div className="relative flex h-10 w-10 items-center justify-center rounded-xl gradient-brand shadow-sm group-hover:shadow-glow-blue transition-all duration-300">
               <MapleLeafIcon className="h-5 w-5 text-white" />
+              {/* Subtle glow ring */}
+              <div className="absolute inset-0 rounded-xl gradient-brand opacity-0 group-hover:opacity-30 blur-md transition-all duration-300" />
             </div>
             <div className="flex flex-col leading-none">
-              <span className="text-base font-extrabold tracking-tight gradient-brand-text" style={{ fontFamily: "var(--font-heading, var(--font-sans))" }}>
+              <span
+                className="text-base font-extrabold tracking-tight gradient-brand-text"
+                style={{ fontFamily: "var(--font-heading, var(--font-sans))" }}
+              >
                 TrueNorth
               </span>
-              <span className="text-[9px] font-bold text-slate-400 tracking-[0.12em] uppercase">
+              <span className="text-[9px] font-bold text-muted-foreground tracking-[0.12em] uppercase">
                 Mortgage Guide
               </span>
             </div>
@@ -62,7 +76,7 @@ export default function Header() {
               className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                 isActive("/")
                   ? "bg-primary/8 text-primary"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
               }`}
             >
               Home
@@ -82,7 +96,7 @@ export default function Header() {
                 className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                   isGuideActive
                     ? "bg-primary/8 text-primary"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
                 aria-expanded={guidesOpen}
                 aria-haspopup="true"
@@ -97,10 +111,10 @@ export default function Header() {
               </button>
 
               {guidesOpen && (
-                <div className="absolute top-full left-0 mt-2 w-72 rounded-2xl border border-slate-200/80 bg-white/95 backdrop-blur-xl shadow-premium py-2 z-50">
+                <div className="absolute top-full left-0 mt-2 w-72 rounded-2xl border border-border/60 bg-card/95 dark:bg-card/95 backdrop-blur-xl shadow-premium py-2 z-50">
                   {/* Dropdown header */}
-                  <div className="px-4 pb-2 pt-1 border-b border-slate-100 mb-1">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Browse Guides</p>
+                  <div className="px-4 pb-2 pt-1 border-b border-border mb-1">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Browse Guides</p>
                   </div>
                   {GUIDE_LINKS.map((link) => (
                     <Link
@@ -109,7 +123,7 @@ export default function Header() {
                       className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-all duration-150 mx-1 rounded-xl ${
                         isActive(link.href)
                           ? "bg-primary/8 text-primary font-semibold"
-                          : "text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
                       }`}
                     >
                       <span className="text-base flex-shrink-0">{link.icon}</span>
@@ -130,7 +144,7 @@ export default function Header() {
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                 isActive("/glossary")
                   ? "bg-primary/8 text-primary"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
               }`}
             >
               Glossary
@@ -140,15 +154,18 @@ export default function Header() {
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                 isActive("/contact")
                   ? "bg-primary/8 text-primary"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
               }`}
             >
               Contact
             </Link>
           </nav>
 
-          {/* ── CTA + Mobile toggle ── */}
-          <div className="flex items-center gap-3">
+          {/* ── CTA + Theme Toggle + Mobile toggle ── */}
+          <div className="flex items-center gap-2.5">
+            {/* Theme toggle */}
+            <ThemeToggle />
+
             <Link
               href="/assessment"
               id="header-start-assessment"
@@ -164,10 +181,10 @@ export default function Header() {
             <button
               id="mobile-menu-toggle"
               onClick={() => setMenuOpen(!menuOpen)}
-              className="lg:hidden p-2 rounded-xl hover:bg-slate-100 transition-colors"
+              className="lg:hidden p-2 rounded-xl hover:bg-muted transition-colors"
               aria-label="Toggle navigation menu"
             >
-              <svg className="h-5 w-5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <svg className="h-5 w-5 text-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 {menuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -180,12 +197,12 @@ export default function Header() {
 
         {/* ── Mobile Menu ── */}
         {menuOpen && (
-          <div className="lg:hidden border-t border-slate-100 py-3 pb-5 space-y-0.5">
+          <div className="lg:hidden border-t border-border py-3 pb-5 space-y-0.5">
             <Link
               href="/"
               onClick={() => setMenuOpen(false)}
               className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                isActive("/") ? "bg-primary/8 text-primary" : "text-slate-700 hover:bg-slate-50"
+                isActive("/") ? "bg-primary/8 text-primary" : "text-foreground hover:bg-muted"
               }`}
             >
               Home
@@ -193,7 +210,7 @@ export default function Header() {
 
             {/* Mobile Guides Section */}
             <div className="px-4 pt-3 pb-1">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2">
                 Mortgage Guides
               </p>
               <div className="space-y-0.5">
@@ -205,7 +222,7 @@ export default function Header() {
                     className={`flex items-center gap-3 px-3 py-2 rounded-xl text-sm transition-colors ${
                       isActive(link.href)
                         ? "bg-primary/8 text-primary font-semibold"
-                        : "text-slate-600 hover:bg-slate-50"
+                        : "text-muted-foreground hover:bg-muted"
                     }`}
                   >
                     <span className="text-base">{link.icon}</span>
@@ -219,7 +236,7 @@ export default function Header() {
               href="/contact"
               onClick={() => setMenuOpen(false)}
               className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                isActive("/contact") ? "bg-primary/8 text-primary" : "text-slate-700 hover:bg-slate-50"
+                isActive("/contact") ? "bg-primary/8 text-primary" : "text-foreground hover:bg-muted"
               }`}
             >
               Contact

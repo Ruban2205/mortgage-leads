@@ -28,7 +28,7 @@ export default function StepNavigation({
         onClick={onBack}
         disabled={isFirstStep}
         id={`step-back-${currentStep}`}
-        className={`gap-2 ${isFirstStep ? "invisible" : ""}`}
+        className={`gap-2 transition-all duration-200 hover:bg-muted ${isFirstStep ? "invisible" : ""}`}
       >
         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -43,7 +43,7 @@ export default function StepNavigation({
           onClick={onSubmit}
           disabled={isSubmitting}
           id="assessment-submit"
-          className="gradient-brand border-0 hover:opacity-90 font-semibold gap-2 px-8"
+          className="gradient-brand border-0 font-semibold gap-2 px-8 shadow-glow-blue hover:shadow-none transition-all duration-300 hover:-translate-y-0.5"
         >
           {isSubmitting ? (
             <>
@@ -67,10 +67,10 @@ export default function StepNavigation({
           type="button"
           onClick={onNext}
           id={`step-next-${currentStep}`}
-          className="gradient-brand border-0 hover:opacity-90 font-semibold gap-2 px-8"
+          className="gradient-brand border-0 font-semibold gap-2 px-8 shadow-sm hover:shadow-glow-blue transition-all duration-300 hover:-translate-y-0.5 group"
         >
           Continue
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </Button>
