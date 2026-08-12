@@ -13,7 +13,7 @@ export default function AffordabilityPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-orange-50 via-slate-50 to-rose-50 py-14 sm:py-20 section-dots">
+      <div className="bg-gradient-to-br from-muted/40 via-muted/20 to-rose-50 py-14 sm:py-20 section-dots">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex w-fit items-center gap-1.5 text-sm text-slate-500 hover:text-primary transition-colors mb-3">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

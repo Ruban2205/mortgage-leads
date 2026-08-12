@@ -28,8 +28,8 @@ export default function LearningCard({
     <div
       className={`relative rounded-2xl border p-6 flex flex-col gap-4 transition-all duration-300 ${
         isActive
-          ? "bg-white border-primary/20 shadow-md card-hover"
-          : "bg-slate-50/60 border-slate-200/60 opacity-80"
+          ? "bg-card border-primary/20 shadow-md card-hover"
+          : "bg-muted/60 border-border opacity-80"
       }`}
     >
       {/* Coming Soon badge */}
@@ -42,10 +42,10 @@ export default function LearningCard({
       {/* Icon */}
       <div
         className={`flex h-12 w-12 items-center justify-center rounded-xl ${
-          isActive ? accentColor : "bg-slate-100"
+          isActive ? accentColor : "bg-muted"
         }`}
       >
-        <span className={isActive ? "text-white" : "text-slate-400"}>
+        <span className={isActive ? "text-white" : "text-muted-foreground"}>
           {icon}
         </span>
       </div>
@@ -54,14 +54,14 @@ export default function LearningCard({
       <div className="flex-1 space-y-2">
         <h3
           className={`text-lg font-bold ${
-            isActive ? "text-slate-900" : "text-slate-500"
+            isActive ? "text-foreground" : "text-muted-foreground"
           }`}
         >
           {title}
         </h3>
         <p
           className={`text-sm leading-relaxed ${
-            isActive ? "text-slate-600" : "text-slate-400"
+            isActive ? "text-muted-foreground" : "text-muted-foreground/60"
           }`}
         >
           {description}
@@ -82,9 +82,9 @@ export default function LearningCard({
           disabled
           id={id}
           variant="outline"
-          className="mt-2 text-slate-400 border-slate-200 cursor-not-allowed"
+          className="mt-2 text-muted-foreground border-border cursor-not-allowed"
         >
-          <svg className="mr-2 h-4 w-4 text-slate-300" fill="currentColor" viewBox="0 0 20 20">
+          <svg className="mr-2 h-4 w-4 text-muted-foreground/40" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
           </svg>
           {ctaLabel}

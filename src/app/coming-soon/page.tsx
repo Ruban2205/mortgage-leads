@@ -22,7 +22,7 @@ export default function ComingSoonPage() {
         </div>
 
         {/* Text */}
-        <span className="inline-block rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-semibold px-4 py-1.5 mb-5">
+        <span className="inline-block rounded-full bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-amber-700 text-xs font-semibold px-4 py-1.5 mb-5">
           Coming Soon
         </span>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">

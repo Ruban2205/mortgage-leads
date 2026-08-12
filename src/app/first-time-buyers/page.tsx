@@ -116,7 +116,7 @@ export default function FirstTimeBuyersPage() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
           {PROGRAMS.map((p) => (
-            <div key={p.name} className="rounded-2xl border border-slate-200 bg-white p-5 space-y-2">
+            <div key={p.name} className="rounded-2xl border border-slate-200 bg-card p-5 space-y-2">
               <span className={`inline-block text-[10px] font-bold uppercase tracking-wider rounded-full px-2.5 py-1 ${p.tagColor}`}>
                 {p.tag}
               </span>

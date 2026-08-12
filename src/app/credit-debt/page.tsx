@@ -46,7 +46,7 @@ export default function CreditDebtPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-rose-50 via-slate-50 to-orange-50 py-14 sm:py-20 section-dots">
+      <div className="bg-gradient-to-br from-muted/40 via-muted/20 to-orange-50 py-14 sm:py-20 section-dots">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex w-fit items-center gap-1.5 text-sm text-slate-500 hover:text-primary transition-colors mb-3">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -90,7 +90,7 @@ export default function CreditDebtPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
           {CREDIT_SCORES.map((score, i) => (
-            <div key={i} className="rounded-xl border border-slate-200 bg-white p-5 flex flex-col h-full card-hover">
+            <div key={i} className="rounded-xl border border-slate-200 bg-card p-5 flex flex-col h-full card-hover">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-2xl font-black text-primary">{score.range}</span>
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-1 rounded">{score.label}</span>
@@ -112,7 +112,7 @@ export default function CreditDebtPage() {
               <h3 className="text-lg font-bold text-slate-900 mb-2">{ratio.title}</h3>
               <p className="text-slate-600 mb-4">{ratio.desc}</p>
               
-              <div className="bg-white rounded-xl border border-slate-100 p-4 mb-4">
+              <div className="bg-card rounded-xl border border-slate-100 p-4 mb-4">
                 <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">What's Included:</h4>
                 <ul className="space-y-2">
                   {ratio.includes.map((item, j) => (

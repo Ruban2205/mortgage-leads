@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function DisclaimerPage() {
   return (
-    <div className="min-h-screen bg-white py-16 sm:py-24">
+    <div className="min-h-screen bg-background py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-8">
           Important Disclaimer

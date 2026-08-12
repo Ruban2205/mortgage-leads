@@ -52,7 +52,7 @@ export default function FAQAccordion() {
   const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id));
 
   return (
-    <section className="py-20 sm:py-28 bg-white">
+    <section className="py-20 sm:py-28 bg-background">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -68,11 +68,11 @@ export default function FAQAccordion() {
             </svg>
             <span className="text-xs font-bold text-primary uppercase tracking-widest">Common Questions</span>
           </div>
-          <h2 className="heading-display text-4xl sm:text-5xl text-slate-900 mb-5">
+          <h2 className="heading-display text-4xl sm:text-5xl text-foreground mb-5">
             Questions Canadians{" "}
             <span className="gradient-brand-text">Ask About Mortgages</span>
           </h2>
-          <p className="text-slate-500 text-lg leading-relaxed">
+          <p className="text-muted-foreground text-lg leading-relaxed">
             General answers to help you start learning. Always verify details with a licensed mortgage professional.
           </p>
         </motion.div>
@@ -92,12 +92,12 @@ export default function FAQAccordion() {
                 <div
                   className={`rounded-2xl border overflow-hidden transition-all duration-300 ${
                     isOpen
-                      ? "border-primary/25 shadow-premium bg-white"
-                      : "border-slate-200 bg-white hover:border-slate-300 shadow-card"
+                      ? "border-primary/25 shadow-premium bg-card"
+                      : "border-border bg-card hover:border-border/80 shadow-card"
                   }`}
                 >
                   {/* Left accent bar on open */}
-                  <div className={`flex`}>
+                  <div className="flex">
                     <div className={`w-1 flex-shrink-0 transition-all duration-300 rounded-l-2xl ${isOpen ? "gradient-brand" : "bg-transparent"}`} />
 
                     <div className="flex-1">
@@ -107,10 +107,10 @@ export default function FAQAccordion() {
                         className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
                         aria-expanded={isOpen}
                       >
-                        <span className={`text-sm font-semibold leading-relaxed transition-colors duration-200 ${isOpen ? "text-primary" : "text-slate-800"}`}>
+                        <span className={`text-sm font-semibold leading-relaxed transition-colors duration-200 ${isOpen ? "text-primary" : "text-foreground"}`}>
                           {faq.q}
                         </span>
-                        <div className={`flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 ${isOpen ? "gradient-brand text-white rotate-45" : "bg-slate-100 text-slate-400"}`}>
+                        <div className={`flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 ${isOpen ? "gradient-brand text-white rotate-45" : "bg-muted text-muted-foreground"}`}>
                           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                           </svg>
@@ -127,7 +127,7 @@ export default function FAQAccordion() {
                             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                             className="overflow-hidden"
                           >
-                            <div className="px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                            <div className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-border pt-3">
                               {faq.a}
                             </div>
                           </motion.div>
@@ -147,10 +147,10 @@ export default function FAQAccordion() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-10 rounded-2xl bg-amber-50 border border-amber-200/70 p-5 text-xs text-amber-700 leading-relaxed"
+          className="mt-10 rounded-2xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200/70 dark:border-amber-500/20 p-5 text-xs text-amber-700 dark:text-amber-400 leading-relaxed"
         >
           <div className="flex items-start gap-3">
-            <svg className="h-4 w-4 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg className="h-4 w-4 text-amber-500 dark:text-amber-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
             </svg>
             <p>

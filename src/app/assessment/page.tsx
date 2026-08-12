@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function AssessmentPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-teal-50/20 py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background py-10 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-2xl">
         {/* Page header */}
         <div className="text-center mb-8">
@@ -25,16 +25,16 @@ export default function AssessmentPage() {
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground mb-3">
             Understand Your Mortgage Readiness
           </h1>
-          <p className="text-slate-600 text-base max-w-lg mx-auto leading-relaxed">
+          <p className="text-muted-foreground text-base max-w-lg mx-auto leading-relaxed">
             Answer a few questions to help a licensed mortgage professional understand your
             situation and explain possible next steps — at no cost or obligation.
           </p>
 
           {/* Trust signals */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-5 text-xs text-slate-500">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-5 text-xs text-muted-foreground">
             {[
               { icon: "🚫", label: "No Credit Check" },
               { icon: "⏱️", label: "Takes About 5 Minutes" },
@@ -50,8 +50,8 @@ export default function AssessmentPage() {
         </div>
 
         {/* Compliance note before form */}
-        <div className="mb-6 rounded-xl bg-blue-50 border border-blue-100 p-4">
-          <p className="text-xs text-blue-700 leading-relaxed text-center">
+        <div className="mb-6 rounded-xl bg-primary/8 border border-primary/15 p-4">
+          <p className="text-xs text-primary leading-relaxed text-center">
             <strong>This is not a mortgage application.</strong> Submitting this assessment does not
             guarantee mortgage approval or create a lending obligation. This is general educational
             information to help a licensed professional understand your situation.
@@ -59,21 +59,21 @@ export default function AssessmentPage() {
         </div>
 
         {/* Assessment card */}
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/60 p-6 sm:p-8">
+        <div className="bg-card rounded-3xl border border-border shadow-xl shadow-black/5 p-6 sm:p-8">
           <AssessmentForm />
         </div>
 
         {/* Disclaimer */}
         <DisclaimerBox className="mt-6" />
 
-        <p className="text-center text-xs text-slate-400 mt-4">
+        <p className="text-center text-xs text-muted-foreground/70 mt-4">
           TrueNorth Mortgage Guide · For informational and educational purposes only · Not financial advice
         </p>
 
-        <p className="text-center text-xs text-slate-400 mt-1">
-          <Link href="/disclaimer" className="underline hover:text-slate-600 transition-colors">View Full Disclaimer</Link>
+        <p className="text-center text-xs text-muted-foreground/70 mt-1">
+          <Link href="/disclaimer" className="underline hover:text-foreground transition-colors">View Full Disclaimer</Link>
           {" · "}
-          <Link href="/privacy-policy" className="underline hover:text-slate-600 transition-colors">Privacy Policy</Link>
+          <Link href="/privacy-policy" className="underline hover:text-foreground transition-colors">Privacy Policy</Link>
         </p>
       </div>
     </div>

@@ -67,7 +67,7 @@ export default function GlossaryList() {
       {/* Search */}
       <div className="relative mb-8">
         <svg
-          className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400"
+          className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -81,12 +81,12 @@ export default function GlossaryList() {
           placeholder="Search mortgage terms..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-xl border border-slate-200 bg-white pl-11 pr-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
+          className="w-full rounded-xl border border-border bg-card pl-11 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
         />
         {search && (
           <button
             onClick={() => setSearch("")}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
             aria-label="Clear search"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -97,12 +97,12 @@ export default function GlossaryList() {
       </div>
 
       {/* Term count */}
-      <p className="text-xs text-slate-400 mb-6">
+      <p className="text-xs text-muted-foreground mb-6">
         Showing {filtered.length} of {TERMS.length} terms
       </p>
 
       {filtered.length === 0 ? (
-        <div className="text-center py-16 text-slate-400">
+        <div className="text-center py-16 text-muted-foreground">
           <p className="text-lg font-medium mb-2">No terms found</p>
           <p className="text-sm">Try a different search term</p>
         </div>
@@ -115,15 +115,15 @@ export default function GlossaryList() {
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl gradient-brand flex-shrink-0">
                   <span className="text-sm font-bold text-white">{letter}</span>
                 </div>
-                <div className="flex-1 h-px bg-slate-200" />
+                <div className="flex-1 h-px bg-border" />
               </div>
 
               {/* Terms */}
               <div className="space-y-3 pl-12">
                 {grouped[letter].map((item) => (
-                  <div key={item.term} className="rounded-xl border border-slate-100 bg-slate-50/70 p-4">
-                    <dt className="text-sm font-bold text-slate-900 mb-1.5">{item.term}</dt>
-                    <dd className="text-sm text-slate-600 leading-relaxed">{item.definition}</dd>
+                  <div key={item.term} className="rounded-xl border border-border bg-muted/50 p-4">
+                    <dt className="text-sm font-bold text-foreground mb-1.5">{item.term}</dt>
+                    <dd className="text-sm text-muted-foreground leading-relaxed">{item.definition}</dd>
                   </div>
                 ))}
               </div>

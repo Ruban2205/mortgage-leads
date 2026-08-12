@@ -3,7 +3,7 @@ import LinkButton from "@/components/LinkButton";
 
 export default function ContactProfessionalCard() {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white shadow-md overflow-hidden">
+    <div className="rounded-2xl border border-border bg-card shadow-md overflow-hidden">
       {/* Card header */}
       <div className="gradient-brand px-6 py-5">
         <div className="flex items-center gap-3">
@@ -73,14 +73,14 @@ export default function ContactProfessionalCard() {
             <div key={field.label} className="flex items-start gap-2.5">
               <div className="flex-shrink-0 mt-0.5 text-primary">{field.icon}</div>
               <div>
-                <p className="text-xs text-slate-400 mb-0.5">{field.label}</p>
-                <p className="text-sm font-medium text-slate-700 italic">{field.value}</p>
+                <p className="text-xs text-muted-foreground mb-0.5">{field.label}</p>
+                <p className="text-sm font-medium text-foreground italic">{field.value}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="pt-2 border-t border-slate-100">
+        <div className="pt-2 border-t border-border">
           <LinkButton
             href="/assessment"
             id="contact-card-assessment"
