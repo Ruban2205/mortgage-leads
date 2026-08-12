@@ -63,7 +63,7 @@ function MortgageDashboardMockup() {
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="relative glass-premium dark:glass-dark-card rounded-3xl p-6 shadow-premium"
+        className="relative glass-premium rounded-3xl p-6 shadow-premium"
       >
         {/* Card header */}
         <div className="flex items-center justify-between mb-5">
@@ -160,7 +160,7 @@ function MortgageDashboardMockup() {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.9 }}
-        className="animate-float absolute -top-6 -right-4 glass-premium dark:glass-dark-card rounded-2xl px-4 py-3 shadow-card"
+        className="animate-float absolute -top-6 -right-4 glass-premium rounded-2xl px-4 py-3 shadow-card"
       >
         <div className="flex items-center gap-2.5">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-50 dark:bg-teal-500/15">
@@ -180,8 +180,7 @@ function MortgageDashboardMockup() {
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 1.1 }}
-        className="animate-float-delay absolute -bottom-6 -left-4 glass-premium dark:glass-dark-card rounded-2xl px-4 py-3 shadow-card"
-      >
+        className="animate-float-delay absolute -bottom-6 -left-4 glass-premium rounded-2xl px-4 py-3 shadow-card"      >
         <div className="flex items-center gap-2.5">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-500/15">
             <svg className="h-4 w-4 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -235,7 +234,7 @@ export default function HeroSection() {
       {/* ── Background ── */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Mesh gradient */}
-        <div className="absolute inset-0 gradient-mesh dark:gradient-mesh-navy" />
+        <div className="absolute inset-0 gradient-mesh" />
         {/* Parallax animated blobs */}
         <motion.div
           style={{ y: blobY }}

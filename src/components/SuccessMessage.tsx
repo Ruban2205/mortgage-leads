@@ -43,7 +43,7 @@ export default function SuccessMessage() {
       </div>
 
       {/* What happens next — glass card */}
-      <div className="glass-premium dark:glass-dark-card rounded-2xl border border-border p-5 text-left max-w-md mx-auto space-y-3">
+      <div className="glass-premium rounded-2xl border border-border p-5 text-left max-w-md mx-auto space-y-3">
         <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">What Happens Next</p>
         {[
           { icon: "📋", text: "Your responses may be reviewed by a licensed mortgage professional" },
